@@ -140,7 +140,9 @@ HTTP_CLIENT_URL = HTTP_CLIENT_ORIGIN_URL + CLIENT_ENDPOINT
 HTTP_SERVER_URL = HTTP_SERVER_ORIGIN_URL + SERVER_ENDPOINT
 
 # https://partenaires.franceconnect.gouv.fr/
-FRANCE_CONNECT_URL_ROOT = "https://app.franceconnect.gouv.fr/api/v1/"
+FRANCE_CONNECT_URL_ROOT = "https://fcp.integ01.dev-franceconnect.fr/api/v1/"
+# PROD
+# FRANCE_CONNECT_URL_ROOT = "https://app.franceconnect.gouv.fr/api/v1/"
 FRANCE_CONNECT_CLIENT_ID = ""
 FRANCE_CONNECT_CLIENT_SECRET = ""
 
