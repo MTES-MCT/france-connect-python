@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -119,3 +119,39 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+ENVIRONMENT = "production"
+
+if ENVIRONMENT in ("PRODUCTION", "PREPRODUCTION"):
+    SCHEME = "https://"
+else:
+    SCHEME = "http://"
+
+HOSTNAME = "foo.gouv.fr"
+# Without trailing slash
+CLIENT_ENDPOINT = ""
+SERVER_ENDPOINT = "/api"
+CLIENT_PORT = ""
+SERVER_PORT = ""
+
+HTTP_CLIENT_ORIGIN_URL = SCHEME + HOSTNAME + CLIENT_PORT
+HTTP_SERVER_ORIGIN_URL = SCHEME + HOSTNAME + SERVER_PORT
+HTTP_CLIENT_URL = HTTP_CLIENT_ORIGIN_URL + CLIENT_ENDPOINT
+HTTP_SERVER_URL = HTTP_SERVER_ORIGIN_URL + SERVER_ENDPOINT
+
+# https://partenaires.franceconnect.gouv.fr/
+FRANCE_CONNECT_URL_ROOT = "https://app.franceconnect.gouv.fr/api/v1/"
+FRANCE_CONNECT_CLIENT_ID = ""
+FRANCE_CONNECT_CLIENT_SECRET = ""
+
+FRANCE_CONNECT_URLS = {
+    "authorize": FRANCE_CONNECT_URL_ROOT + "authorize",
+    "token": FRANCE_CONNECT_URL_ROOT + "token",
+    "userinfo": FRANCE_CONNECT_URL_ROOT + "userinfo",
+    "logout": FRANCE_CONNECT_URL_ROOT + "logout",
+}
+FRANCE_CONNECT_URL_CALLBACK = HTTP_CLIENT_URL + "/fc/callback"
+FRANCE_CONNECT_URL_POST_LOGOUT = HTTP_CLIENT_URL + "/fc/postlogout"
+
+JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=3600 * 24)
+JWT_PAYLOAD_HANDLER = "project.franceconnect.jwt.jwt_payload_handler"
